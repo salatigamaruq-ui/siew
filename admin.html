@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071a33"><title>SIEW | Admin</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="index.html"><span class="mark">S</span><span><b>SIEW</b><small>ADMIN CONSOLE</small></span></a><span class="secure">● Akses admin</span></header>
+  <main class="wrap">
+    <section class="login card" id="loginPanel">
+      <div class="eyebrow">AREA TERBATAS</div><h1>Panel Admin SIEW</h1><p>Masuk menggunakan akun admin yang dibuat di Firebase Authentication.</p>
+      <form id="loginForm"><label for="email">Email admin</label><input id="email" type="email" autocomplete="username" required placeholder="admin@sekolah.sch.id"><label for="password">Kata sandi</label><input id="password" type="password" autocomplete="current-password" required placeholder="Kata sandi Firebase"><button type="submit" class="primary" id="loginButton">Masuk ke dashboard</button></form>
+      <p id="loginMessage" class="message" role="status"></p><p class="small">Belum mengatur Firebase? Baca <a href="README-ADMIN.txt">panduan konfigurasi</a>.</p>
+    </section>
+    <section id="dashboardPanel" hidden>
+      <div class="pagehead"><div><div class="eyebrow">RINGKASAN</div><h1>Dashboard Admin</h1><p id="adminIdentity">Data sesi SIEW</p></div><button id="logoutButton" class="outline">Keluar</button></div>
+      <div id="notice" class="notice">Data yang muncul berasal dari Realtime Database Firebase.</div>
+      <div class="stats"><article class="stat card"><span>Total sesi</span><strong id="totalCount">0</strong></article><article class="stat card"><span>Dalam rentang acuan</span><strong id="normalCount">0</strong></article><article class="stat card"><span>Perlu evaluasi</span><strong id="reviewCount">0</strong></article><article class="stat card"><span>Data belum lengkap</span><strong id="incompleteCount">0</strong></article></div>
+      <section class="card table-card"><div class="table-head"><div><h2>Riwayat peserta</h2><p>Gunakan inisial/kode peserta bila memungkinkan.</p></div><div class="actions"><input id="searchInput" type="search" placeholder="Cari nama atau kode..."><button id="exportButton" class="outline">Ekspor CSV</button><button id="refreshButton" class="outline">Muat ulang</button></div></div>
+        <div class="table-wrap"><table><thead><tr><th>Waktu</th><th>Peserta</th><th>Usia</th><th>BPM</th><th>SpO₂</th><th>Napas/menit</th><th>Suhu °C</th><th>Status</th></tr></thead><tbody id="sessionRows"><tr><td colspan="8" class="empty">Memuat data...</td></tr></tbody></table></div>
+        <p id="tableMessage" class="small"></p>
+      </section>
+      <p class="disclaimer">SIEW adalah prototipe skrining non-diagnostik. Status yang ditampilkan bukan diagnosis medis. Batasi akses data peserta hanya untuk petugas berwenang.</p>
+    </section>
+  </main>
+  <script type="module" src="admin.js"></script>
+</body></html>
