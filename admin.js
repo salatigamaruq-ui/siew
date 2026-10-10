@@ -3,7 +3,15 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 import { firebaseConfig } from "./firebase-config.js";
 const $ = id => document.getElementById(id);
-const configured = firebaseConfig.apiKey !== "ISI_API_KEY" && firebaseConfig.projectId !== "ISI_PROJECT_ID" && firebaseConfig.databaseURL.includes("firebasedatabase.app");
+
+const configured =
+  typeof firebaseConfig?.apiKey === "string" &&
+  firebaseConfig.apiKey.length > 0 &&
+  firebaseConfig.apiKey !== "ISI_API_KEY" &&
+  firebaseConfig.projectId === "siew-screening" &&
+  typeof firebaseConfig?.databaseURL === "string" &&
+  firebaseConfig.databaseURL.includes("firebasedatabase.app");
+
 let auth, db, sessions = [];
 const escapeHtml = value => String(value ?? "—").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 if (!configured) { $("loginMessage").textContent = "Firebase belum dikonfigurasi. Isi firebase-config.js dan ikuti README-ADMIN.txt."; $("loginButton").disabled = true; }
