@@ -5,12 +5,15 @@ import { firebaseConfig } from "./firebase-config.js";
 const $ = id => document.getElementById(id);
 
 const configured =
+ 
+const configured =
   typeof firebaseConfig?.apiKey === "string" &&
   firebaseConfig.apiKey.length > 0 &&
-  firebaseConfig.apiKey !== "AIzaSyClJLdmskm6diWx4Jg4MGrwboZmgMIDw6o" &&
+  !firebaseConfig.apiKey.startsWith("ISI_") &&
   firebaseConfig.projectId === "siew-screening" &&
   typeof firebaseConfig?.databaseURL === "string" &&
   firebaseConfig.databaseURL.includes("firebasedatabase.app");
+
 
 let auth, db, sessions = [];
 const escapeHtml = value => String(value ?? "—").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
