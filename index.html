@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071a33" />
+  <title>SIEW | Smart Screening Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark"><span>S</span><i></i></div>
+        <div><div class="brand-name">SIEW</div><div class="brand-caption">SMART SCREENING</div></div>
+      </div>
+      <div class="side-label">MENU UTAMA</div>
+      <a class="nav-item active" href="#dashboard"><span class="nav-icon">▦</span> Dashboard</a>
+      <a class="nav-item" href="#pengukuran"><span class="nav-icon">＋</span> Pengukuran</a>
+      <a class="nav-item" href="#hasil"><span class="nav-icon">⌁</span> Hasil skrining</a>
+      <div class="sidebar-bottom">
+        <div class="side-status"><span class="pulse-dot"></span><div><strong>Mode prototipe</strong><small>Integrasi ESP32 disiapkan</small></div></div>
+        <div class="side-footer">SIEW • Prototype interface<br/>Bukan alat diagnosis medis</div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">SISTEM PEMANTAUAN FISIOLOGIS</div>
+          <h1>Dashboard Skrining</h1>
+          <p class="subheading">Pantau parameter, masukkan suhu, dan proses data melalui ESP32.</p>
+        </div>
+        <div class="top-actions">
+          <div class="connection-pill" id="connectionPill"><span class="connection-dot"></span><span id="connectionText">ESP32 belum terhubung</span></div>
+          <div class="avatar">SW</div>
+        </div>
+      </header>
+
+      <section class="welcome-banner">
+        <div class="banner-copy">
+          <div class="banner-chip"><span class="sparkle">✦</span> SIEW MONITORING SYSTEM</div>
+          <h2>Screen smarter.<br/><span>Monitor with clarity.</span></h2>
+          <p>Data sensor dari ESP32 dan suhu yang kamu masukkan akan dikumpulkan untuk proses skrining.</p>
+          <a href="#pengukuran" class="banner-button">Mulai pengukuran <span>↗</span></a>
+        </div>
+        <div class="banner-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="core"><div class="core-cross">＋</div><div class="core-label">SIEW</div></div>
+          <div class="float-card float-heart"><span>♥</span><div><b>MAX30102</b><small>BPM • SpO₂</small></div></div>
+          <div class="float-card float-lungs"><span>≈</span><div><b>RESPIRASI</b><small>Napasan/menit</small></div></div>
+          <div class="art-wave"></div>
+        </div>
+      </section>
+
+      <div class="section-heading">
+        <div><div class="eyebrow">RINGKASAN LIVE</div><h2>Parameter fisiologis</h2></div>
+        <div class="live-label"><span class="pulse-dot"></span> <span id="updatedLabel">Menunggu data</span></div>
+      </div>
+
+      <section class="metrics-grid">
+        <article class="metric-card">
+          <div class="metric-top"><div class="metric-icon heart">♥</div><span class="metric-tag">MAX30102</span></div>
+          <div class="metric-name">Detak jantung</div>
+          <div class="metric-value"><span id="bpmValue">—</span><small>BPM</small></div>
+          <div class="metric-bottom"><span class="mini-line">⌁</span><span id="bpmHint">Menunggu ESP32</span></div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-top"><div class="metric-icon oxygen">◉</div><span class="metric-tag">MAX30102</span></div>
+          <div class="metric-name">Saturasi oksigen</div>
+          <div class="metric-value"><span id="spo2Value">—</span><small>% SpO₂</small></div>
+          <div class="metric-bottom"><span class="mini-line">⌁</span><span id="spo2Hint">Menunggu ESP32</span></div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-top"><div class="metric-icon breath">≋</div><span class="metric-tag">ESP32</span></div>
+          <div class="metric-name">Frekuensi napas</div>
+          <div class="metric-value"><span id="respValue">—</span><small>/menit</small></div>
+          <div class="metric-bottom"><span class="mini-line">⌁</span><span id="respHint">Menunggu ESP32</span></div>
+        </article>
+        <article class="metric-card temperature-card">
+          <div class="metric-top"><div class="metric-icon temp">°</div><span class="metric-tag">INPUT MANUAL</span></div>
+          <div class="metric-name">Suhu tubuh</div>
+          <div class="metric-value"><span id="tempValue">—</span><small>°C</small></div>
+          <div class="metric-bottom"><span class="mini-line">✎</span><span id="tempHint">Diisi melalui formulir</span></div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel input-panel" id="pengukuran">
+          <div class="panel-heading"><div><div class="eyebrow">LANGKAH 01</div><h2>Input suhu tubuh</h2></div><div class="panel-symbol">°C</div></div>
+          <p class="panel-description">Masukkan hasil dari termometer. Suhu akan dikirim ke ESP32 untuk diproses bersama data sensor lainnya.</p>
+          <form id="temperatureForm">
+            <label for="temperatureInput">Suhu hasil pengukuran <span>(°C)</span></label>
+            <div class="input-wrap"><input id="temperatureInput" type="number" min="25" max="45" step="0.1" placeholder="Contoh: 36.8" required /><span>°C</span></div>
+            <div class="helper-text">Gunakan hasil pengukuran termometer yang sudah dilakukan.</div>
+            <div class="button-row"><button class="primary-button" id="submitTemp" type="submit"><span>↗</span> Kirim suhu & proses</button><button class="secondary-button" id="demoButton" type="button">Coba demo</button></div>
+          </form>
+          <div class="process-box" id="processBox" aria-live="polite">
+            <div class="process-spinner" id="processSpinner"></div>
+            <div><strong id="processTitle">Siap memulai</strong><p id="processMessage">Masukkan suhu, lalu kirim untuk memulai proses.</p></div>
+          </div>
+        </article>
+
+        <article class="panel result-panel" id="hasil">
+          <div class="panel-heading"><div><div class="eyebrow">LANGKAH 02</div><h2>Hasil skrining</h2></div><div class="result-shield">✦</div></div>
+          <div class="result-state waiting" id="resultState">
+            <div class="result-state-icon" id="resultIcon">…</div>
+            <div><div class="result-overline">STATUS SAAT INI</div><h3 id="resultTitle">Menunggu data</h3><p id="resultDescription">Hasil akan muncul setelah data sensor dan suhu tersedia.</p></div>
+          </div>
+          <div class="result-details">
+            <div><span>Parameter tersedia</span><strong id="dataCount">0 dari 4</strong></div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="result-note"><span>ⓘ</span><p>Hasil skrining bukan diagnosis. Jika ada gejala atau kondisi yang mengkhawatirkan, mintalah bantuan tenaga kesehatan.</p></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel connection-panel">
+        <div class="connection-panel-icon">⌘</div>
+        <div class="connection-panel-copy"><h2>Koneksi perangkat ESP32</h2><p>Masukkan alamat IP ESP32 saat perangkat dan komputer berada pada jaringan yang sama.</p></div>
+        <form id="connectionForm" class="connection-form">
+          <label for="espAddress">Alamat ESP32</label>
+          <div class="address-row"><input id="espAddress" type="text" value="http://192.168.4.1" spellcheck="false" /><button class="outline-button" type="submit">Hubungkan</button></div>
+          <small id="connectionHelp">Endpoint yang disiapkan: POST /set-suhu dan GET /status</small>
+        </form>
+      </section>
+
+      <footer class="footer"><div><strong>SIEW</strong> · Sistem Skrining dan Monitoring</div><div>Prototipe penelitian · <span id="footerYear"></span></div></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
