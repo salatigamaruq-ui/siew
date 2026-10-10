@@ -1,33 +1,18 @@
-[README.txt](https://github.com/user-attachments/files/33283330/README.txt)SIEW WEBSITE — PROTOTIPE ANTARMUKA
+[README.txt](https://github.com/user-attachments/files/33284449/README.txt)SIEW WEBSITE DENGAN HALAMAN DATA DIRI
 
-Isi folder:
-- index.html: halaman dashboard
-- style.css: tampilan responsif
-- script.js: input suhu, mode demo, polling status ESP32
+Buka index.html untuk melihat halaman data diri terlebih dahulu, kemudian dashboard.
 
-CARA MENJALANKAN DEMO
-1. Ekstrak ZIP.
-2. Buka index.html di browser.
-3. Tekan "Coba demo" untuk melihat contoh tampilan. Data demo bukan data sensor nyata.
+Kolom:
+- Nama atau inisial (wajib)
+- Usia (wajib)
+- Jenis kelamin (opsional)
+- Kode peserta (opsional)
+- Persetujuan penggunaan data sesi (wajib)
 
-KONTRAK API YANG DISIAPKAN UNTUK INTEGRASI ESP32
-1. POST /set-suhu
-   Request JSON: {"suhu": 36.8}
-   ESP32 perlu membaca nilai suhu manual dari body JSON dan menyimpannya untuk evaluasi.
+Identitas hanya disimpan di memori halaman selama sesi berjalan dan tidak dikirim ke ESP32 oleh prototipe ini. Jika ingin menyimpan identitas atau mengaitkannya dengan hasil pengukuran, perlu dirancang mekanisme penyimpanan dan perlindungan data secara terpisah.
 
-2. GET /status
-   Response JSON yang disarankan:
-   {
-     "bpm": 80,
-     "spo2": 98,
-     "napas": 16,
-     "suhu": 36.8,
-     "statusSIEW": "DALAM RENTANG ACUAN"
-   }
+Integrasi perangkat menggunakan:
+- POST /set-suhu
+- GET /status
 
-PENTING
-- Endpoint tersebut adalah kontrak yang disiapkan di website, bukan endpoint yang otomatis sudah tersedia di sketch ESP32.
-- Agar terhubung, sketch ESP32 harus membuat kedua endpoint tersebut.
-- Jika halaman dibuka dari komputer dan ESP32 berada di jaringan lain, pastikan keduanya berada pada jaringan yang dapat saling menjangkau.
-- Jika browser memblokir CORS, solusi termudah untuk setup akhir adalah menyajikan halaman website langsung dari WebServer ESP32 atau mengatur header CORS pada ESP32.
-- Label status hanyalah contoh aturan prototipe dan bukan diagnosis medis.
+Buka website dari ESP32 untuk menguji koneksi perangkat. Jika dibuka secara lokal, website tetap dapat dipreview tetapi komunikasi nyata membutuhkan endpoint ESP32 aktif.
