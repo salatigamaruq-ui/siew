@@ -11,7 +11,60 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app-shell">
+
+  <section class="registration-screen" id="registrationScreen">
+    <div class="registration-card">
+      <div class="registration-brand">
+        <div class="brand-mark"><span>S</span><i></i></div>
+        <div><div class="brand-name">SIEW</div><div class="brand-caption">SMART SCREENING</div></div>
+      </div>
+      <div class="registration-step">LANGKAH 01 • IDENTITAS PESERTA</div>
+      <h1>Selamat datang di<br/><span>SIEW Screening.</span></h1>
+      <p class="registration-intro">Lengkapi data singkat sebelum memulai sesi skrining. Gunakan kode peserta atau inisial jika tidak perlu menggunakan nama lengkap.</p>
+      <form id="identityForm" class="identity-form">
+        <div class="form-field">
+          <label for="participantName">Nama atau inisial <span>*</span></label>
+          <input id="participantName" type="text" maxlength="80" placeholder="Masukkan nama atau inisial" autocomplete="name" required />
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="participantAge">Usia <span>*</span></label>
+            <div class="field-with-suffix"><input id="participantAge" type="number" min="1" max="120" step="1" placeholder="Contoh: 17" required /><span>tahun</span></div>
+          </div>
+          <div class="form-field">
+            <label for="participantSex">Jenis kelamin <small>(opsional)</small></label>
+            <select id="participantSex">
+              <option value="">Pilih (opsional)</option>
+              <option value="Perempuan">Perempuan</option>
+              <option value="Laki-laki">Laki-laki</option>
+              <option value="Tidak ingin menyebutkan">Tidak ingin menyebutkan</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="participantCode">Kode peserta <span class="optional-label">(opsional)</span></label>
+          <input id="participantCode" type="text" maxlength="40" placeholder="Contoh: SIEW-001" />
+          <small>Gunakan kode penelitian jika tidak ingin memakai nama lengkap.</small>
+        </div>
+        <label class="consent-row" for="dataConsent">
+          <input id="dataConsent" type="checkbox" required />
+          <span>Saya memahami bahwa SIEW adalah prototipe skrining, bukan alat diagnosis. Data identitas digunakan untuk sesi ini.</span>
+        </label>
+        <button class="registration-submit" type="submit">Lanjut ke dashboard <span>→</span></button>
+        <div class="privacy-note"><span>▣</span> Data identitas hanya disimpan sementara di halaman selama sesi berlangsung dan tidak dikirim ke ESP32 oleh prototipe ini.</div>
+      </form>
+      <div class="registration-footer">SIEW · Prototype research interface</div>
+    </div>
+    <div class="registration-side">
+      <div class="side-orbit side-orbit-one"></div><div class="side-orbit side-orbit-two"></div>
+      <div class="registration-visual-core"><span>✦</span><b>SIEW</b><small>SCREENING SYSTEM</small></div>
+      <div class="registration-floating float-top"><span>♥</span><div><b>Physiological data</b><small>BPM • SpO₂</small></div></div>
+      <div class="registration-floating float-bottom"><span>⌁</span><div><b>Web-based monitoring</b><small>ESP32 connected workflow</small></div></div>
+      <p class="registration-side-caption">Measure with care.<br/><strong>Interpret responsibly.</strong></p>
+    </div>
+  </section>
+
+  <div class="app-shell" id="dashboardApp" hidden>
     <aside class="sidebar">
       <div class="brand">
         <div class="brand-mark"><span>S</span><i></i></div>
@@ -35,6 +88,8 @@
           <p class="subheading">Pantau parameter, masukkan suhu, dan proses data melalui ESP32.</p>
         </div>
         <div class="top-actions">
+          <div class="participant-chip" id="participantChip">Peserta: —</div>
+          <button class="change-participant" id="changeParticipant" type="button" title="Kembali ke data diri">Ganti peserta</button>
           <div class="connection-pill" id="connectionPill"><span class="connection-dot"></span><span id="connectionText">ESP32 belum terhubung</span></div>
           <div class="avatar">SW</div>
         </div>

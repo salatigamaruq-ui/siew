@@ -7,6 +7,39 @@ let toastTimer;
 
 $("footerYear").textContent = new Date().getFullYear();
 
+// Identitas hanya disimpan di memori browser selama sesi ini.
+// Data identitas tidak dikirim ke ESP32 oleh prototipe ini.
+let participantSession = null;
+$("identityForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const name = $("participantName").value.trim();
+  const age = Number($("participantAge").value);
+  const sex = $("participantSex").value;
+  const code = $("participantCode").value.trim();
+  if (!name || !Number.isInteger(age) || age < 1 || age > 120) {
+    toast("Periksa nama/inisial dan usia peserta.");
+    return;
+  }
+  if (!$("dataConsent").checked) {
+    toast("Mohon setujui keterangan penggunaan data sesi.");
+    return;
+  }
+  participantSession = { name, age, sex, code, startedAt: new Date().toISOString() };
+  $("registrationScreen").hidden = true;
+  $("dashboardApp").hidden = false;
+  $("participantChip").textContent = "Peserta: " + (code || name);
+  toast("Data sesi diisi. Silakan lanjut ke dashboard SIEW.");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+$("changeParticipant").addEventListener("click", () => {
+  participantSession = null;
+  $("registrationScreen").hidden = false;
+  $("dashboardApp").hidden = true;
+  $("identityForm").reset();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+
 function toast(message) {
   const el = $("toast");
   el.textContent = message;
