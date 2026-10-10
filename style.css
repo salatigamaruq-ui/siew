@@ -34,3 +34,43 @@
 .change-participant{border:0;background:transparent;color:#2e72c8;font-size:9px;font-weight:700;cursor:pointer;padding:7px}
 @media(max-width:900px){.registration-screen{grid-template-columns:1fr}.registration-card{width:min(100%,620px);padding:30px 24px}.registration-brand{margin-bottom:32px}.registration-side{display:none}}
 @media(max-width:480px){.form-row{grid-template-columns:1fr}.registration-card h1{font-size:32px}.registration-card{padding:26px 20px}.participant-chip{display:none}}
+
+
+/* Responsive layout fixes: desktop 100% zoom and mobile */
+*, *::before, *::after { box-sizing: border-box; }
+html { width: 100%; overflow-x: hidden; }
+body { width: 100%; min-width: 320px; overflow-x: hidden; }
+.registration-screen { width: 100%; min-width: 0; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+.registration-card { width: 100%; max-width: 650px; min-width: 0; }
+.identity-form, .form-field, .form-row { min-width: 0; width: 100%; }
+.form-row { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: start; }
+.form-field input, .form-field select, .field-with-suffix { display: block; width: 100%; max-width: 100%; min-width: 0; min-height: 44px; }
+.field-with-suffix { display: flex; }
+.field-with-suffix input { flex: 1 1 auto; width: 1%; min-width: 0; min-height: 42px; padding: 10px; }
+.field-with-suffix > span { flex: 0 0 auto; padding: 0 9px; }
+.form-field select { appearance: auto; padding: 10px 12px; }
+.form-field label { line-height: 1.4; overflow-wrap: anywhere; }
+.registration-side { min-width: 0; }
+.app-shell { min-width: 0; width: 100%; }
+.main-content { min-width: 0; }
+.topbar, .top-actions, .connection-panel, .content-grid, .metrics-grid { min-width: 0; }
+@media (max-width: 900px) {
+  .registration-screen { grid-template-columns: minmax(0, 1fr); }
+  .registration-card { max-width: 620px; padding: 30px clamp(18px, 5vw, 32px); }
+  .registration-side { display: none; }
+}
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .registration-card { padding: 24px 18px; }
+  .registration-brand { margin-bottom: 28px; }
+  .registration-card h1 { font-size: clamp(28px, 8vw, 34px); }
+  .registration-intro { font-size: 12px; }
+  .form-field input, .form-field select { font-size: 14px; min-height: 46px; }
+  .field-with-suffix input { font-size: 14px; }
+  .consent-row { font-size: 11px; }
+  .registration-submit { width: 100%; min-height: 46px; }
+  .main-content { padding: 20px 12px; }
+  .welcome-banner { padding: 22px 18px; }
+  .connection-panel { flex-direction: column; align-items: stretch; }
+  .connection-form { width: 100%; margin-left: 0; }
+}
