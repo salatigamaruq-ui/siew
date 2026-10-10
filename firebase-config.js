@@ -5,5 +5,5 @@ export const firebaseConfig = {
   authDomain: "ISI_PROJECT_ID.firebaseapp.com",
   databaseURL: "https://ISI_DATABASE_NAME.REGION.firebasedatabase.app",
   projectId: "ISI_PROJECT_ID",
-  appId: "ISI_APP_ID"
+  appId: "APP_ID_DARI_FIREBASE"
 };
