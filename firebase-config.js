@@ -3,8 +3,10 @@
 export const firebaseConfig = {
   apiKey: "AIzaSyClJLdmskm6diWx4Jg4MGrwboZmgMIDw6o",
   authDomain: "siew-screening.firebaseapp.com",
-  databaseURL: "https://siew-screening-default-rtdb.asia-southeast1.firebasedatabase.app/",
   projectId: "siew-screening",
-  appId: "1:1001833983948:web:e3a2bbdb9123da76443769"
+  storageBucket: "siew-screening.firebasestorage.app",
+  messagingSenderId: "1001833983948",
+  appId: "1:1001833983948:web:e3a2bbdb9123da76443769",
+  measurementId: "G-19R7TJPL89"
 };
 
